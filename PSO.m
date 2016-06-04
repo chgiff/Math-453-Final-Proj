@@ -7,7 +7,7 @@
 % 
 % @return the vector than minimizes the function
 
-function x_min = PSO(func, x_constraint, y_constraint,tolerance, fig_id)
+function x_min = PSO(func, x_constraint, y_constraint, tolerance, fig_id)
 
 %widths of x and y constraints0
 x_width = abs(x_constraint(1) - x_constraint(2));
@@ -16,7 +16,7 @@ y_width = abs(y_constraint(1) - y_constraint(2));
 x_offset = min(x_constraint(1), x_constraint(2));
 y_offset = min(y_constraint(1), y_constraint(2));
 
-iter = 10;
+iter = 200;
 
 omega = .5;
 C1 = .9;
@@ -25,7 +25,7 @@ C2 = 1.1;
 soln = [-0.0093, 1.5814];
 
 %number of particles
-particles = 5;
+particles = 15;
 X = rand(particles);
 X = X(:, 1:2);
 X(:, 1) = x_width.*X(:, 1) + x_offset;
@@ -34,6 +34,7 @@ X(:, 2) = y_width.*X(:, 2) + y_offset;
 P = X;
 g = findMin(func, P);
 prevG = 1000;
+generations = 0;
 
 V = rand(particles);
 V = V(:, 1:2);
@@ -83,9 +84,15 @@ prevG = g;
 g = findMin(func, P);
 
 if(prevG - g < tolerance)
-    fprintf('Exiting, difference in minimum less than tolerance\n\n');
-    x_min = g';
-    return;
+    if(generations < 4)
+        generations = generations +1;
+    else
+        fprintf('Exiting, difference in minimum less than tolerance for 4 generations\n\n');
+        x_min = g';
+        return;
+    end
+else 
+    generations = 0;
 end
 
 fprintf('%i\t  (%.4f, %.4f)\t\t%.5f\n', k, g(1), g(2), sqrt((g(1) - soln(1))^2 + (g(2) - soln(2))^2));
