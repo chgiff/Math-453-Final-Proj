@@ -7,7 +7,7 @@
 % 
 % @return the vector than minimizes the function
 
-function x_min = PSO(func, x_constraint, y_constraint, fig_id)
+function x_min = PSO(func, x_constraint, y_constraint,tolerance, fig_id)
 
 %widths of x and y constraints0
 x_width = abs(x_constraint(1) - x_constraint(2));
@@ -33,6 +33,7 @@ X(:, 2) = y_width.*X(:, 2) + y_offset;
 
 P = X;
 g = findMin(func, P);
+prevG = 1000;
 
 V = rand(particles);
 V = V(:, 1:2);
@@ -78,7 +79,14 @@ for i = 1:particles
         P(i,:) = X(i,:);
     end 
 end
+prevG = g;
 g = findMin(func, P);
+
+if(prevG - g < tolerance)
+    fprintf('Exiting, difference in minimum less than tolerance\n\n');
+    x_min = g';
+    return;
+end
 
 fprintf('%i\t  (%.4f, %.4f)\t\t%.5f\n', k, g(1), g(2), sqrt((g(1) - soln(1))^2 + (g(2) - soln(2))^2));
 

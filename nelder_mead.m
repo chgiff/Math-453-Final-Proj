@@ -111,8 +111,13 @@ function [ x_opt, n_feval ] = nelder_mead ( x, function_handle, flag )
   converged = 0;
   diverged  = 0;
   
+  k = 0;
+  
+   fprintf(' k \t\t   x(k)\t\t\t  error\n');
   while ( ~converged && ~diverged )
-%    
+k = k+1;
+      
+      %    
 %  Compute the midpoint of the simplex opposite the worst point.
 %
     x_bar = sum ( x(1:n_dim,:) ) / n_dim;
@@ -222,6 +227,9 @@ function [ x_opt, n_feval ] = nelder_mead ( x, function_handle, flag )
       plot(x(2:3,1),x(2:3,2),'b')
       plot(x([1 3],1),x([1 3],2),'b')
     end
+    
+        %print stuff
+    fprintf(' %i\t(%.4f, %.4f)\t %.6f\n', k, x(1,1), x(1,2), function_handle(x(1,:)) - function_handle([0.6504, -0.6503]));
 
   end
 

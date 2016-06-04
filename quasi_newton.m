@@ -59,7 +59,7 @@ epsilon_x = options(2);
 epsilon_g = options(3);
 max_iter=options(14);
 
-ros_cnt;
+%ros_cnt;
 
 if length(xnew) == 2
   plot(xnew(1),xnew(2),'o')
@@ -133,7 +133,7 @@ for k = 1:max_iter,
     disp(d);
   end
 
-  pltpts(xnew,xcurr);
+  %pltpts(xnew,xcurr);
 
   if k == max_iter
     disp('Terminating with maximum number of iterations');
