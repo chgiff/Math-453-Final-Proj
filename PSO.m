@@ -16,7 +16,7 @@ y_width = abs(y_constraint(1) - y_constraint(2));
 x_offset = min(x_constraint(1), x_constraint(2));
 y_offset = min(y_constraint(1), y_constraint(2));
 
-iter = 20;
+iter = 10;
 
 omega = .5;
 C1 = .9;
@@ -25,7 +25,7 @@ C2 = 1.1;
 soln = [-0.0093, 1.5814];
 
 %number of particles
-particles = 50;
+particles = 5;
 X = rand(particles);
 X = X(:, 1:2);
 X(:, 1) = x_width.*X(:, 1) + x_offset;
