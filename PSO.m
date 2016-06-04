@@ -95,7 +95,7 @@ end
 
 fprintf('Minimizer: [%.4f, %.4f]\n', g(1), g(2));
 
-x_min = g;
+x_min = g';
 
 
 function g = findMin(func, P)
