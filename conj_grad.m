@@ -62,6 +62,7 @@ max_iter=options(14);
 
 %table header
 if print,
+    fprintf('Starting conjugate gradient for local optimization');
     fprintf(' k \t\t x(k) \t\t\t\t\td(k) \t\t\t alpha \t error\n');
 end %if
 

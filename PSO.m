@@ -63,6 +63,7 @@ hold off;
 pause;
 
 %loop
+fprintf('Starting particle swarm global optimiztion');
 fprintf('k\t\tCurent Minimizer\tError\n');
 for k = 1:iter
 r = rand(particles);
@@ -87,7 +88,9 @@ if(prevG - g < tolerance)
     if(generations < 4)
         generations = generations +1;
     else
-        fprintf('Exiting, difference in minimum less than tolerance for 4 generations\n\n');
+        fprintf('Exiting, difference in minimum less than tolerancse\n');
+        disp(tolerance);
+        fprintf(' for 4 generations\n');
         x_min = g';
         return;
     end
@@ -126,4 +129,3 @@ G = [];
 for i = 1:length
     G(i,:) = g;
 end
-        

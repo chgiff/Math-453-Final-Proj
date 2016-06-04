@@ -68,6 +68,7 @@ end
 
 %table header
 if print,
+    fprintf('Starting quasi-Newton local optimization');
     fprintf(' k \t\t x(k) \t\t\t\t\td(k) \t\t\t alpha \t error\n');
 end %if
 
