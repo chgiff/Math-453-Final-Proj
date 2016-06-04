@@ -66,6 +66,11 @@ if length(xnew) == 2
   text(xnew(1),xnew(2),'Start Point')
 end
 
+%table header
+if print,
+    fprintf(' k \t\t x(k) \t\t\t\t\td(k) \t\t\t alpha \t error\n');
+end %if
+
 
 reset_cnt = 0;
 g_curr=feval(grad,xnew);
@@ -83,14 +88,22 @@ for k = 1:max_iter,
   xnew = xcurr+alpha*d;
 
   if print,
-    disp('Iteration number k =');
-    disp(k);  %print iteration index k
-    disp('alpha =');
-    disp(alpha);  %print alpha
-    disp('Gradient = ');
-    disp(g_curr'); %print gradient
-    disp('New point =');
-    disp(xnew'); %print new point
+%     disp('Iteration number k =');
+%     disp(k);  %print iteration index k
+%     disp('alpha =');
+%     disp(alpha);  %print alpha
+%     disp('Gradient = ');
+%     disp(g_curr'); %print gradient
+%     disp('New point =');
+%     disp(xnew'); %print new point
+    %my own table output
+    fprintf(' %i', k); %iteration
+    fprintf('\t(%.4f, %.4f)', xnew(1), xnew(2)); %new x pos
+    fprintf('\t(%.4f, %.4f)    ', d(1), d(2)); %direction
+    fprintf('\t%.4f', alpha) %alpha
+    fprintf('\t%.4f', sqrt((xnew(1)-1)^2 + (xnew(2)-1)^2)); %error
+    fprintf('\n');
+
   end %if
 
   if norm(xnew-xcurr) <= epsilon_x*norm(xcurr)
@@ -127,10 +140,10 @@ for k = 1:max_iter,
   end
 
   if print,
-    disp('New H =');
-    disp(H);
-    disp('New d =');
-    disp(d);
+%     disp('New H =');
+%     disp(H);
+%     disp('New d =');
+%     disp(d);
   end
 
   %pltpts(xnew,xcurr);
