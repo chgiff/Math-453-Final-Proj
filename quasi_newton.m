@@ -68,7 +68,7 @@ end
 
 %table header
 if print,
-    fprintf('Starting quasi-Newton local optimization');
+    fprintf('Starting quasi-Newton local optimization\n');
     fprintf(' k \t\t x(k) \t\t\t\t\td(k) \t\t\t alpha \t error\n');
 end %if
 
@@ -102,7 +102,7 @@ for k = 1:max_iter,
     fprintf('\t(%.4f, %.4f)', xnew(1), xnew(2)); %new x pos
     fprintf('\t(%.4f, %.4f)    ', d(1), d(2)); %direction
     fprintf('\t%.4f', alpha) %alpha
-    fprintf('\t%.4f', sqrt((xnew(1)-1)^2 + (xnew(2)-1)^2)); %error
+    fprintf('\t%.4f', sqrt((xnew(1)-0.22827891198538)^2 + (xnew(2)-(-1.625534953142922))^2)); %error
     fprintf('\n');
 
   end %if

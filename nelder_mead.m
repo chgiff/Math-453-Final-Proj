@@ -228,7 +228,7 @@ k = k+1;
       plot(x([1 3],1),x([1 3],2),'b')
     end
     
-        %print stuff
+    %print stuff
     fprintf('Starting Nelder-Mead global optimization');
     fprintf(' %i\t(%.4f, %.4f)\t %.6f\n', k, x(1,1), x(1,2), function_handle(x(1,:)) - function_handle([0.6504, -0.6503]));
 
