@@ -47,6 +47,8 @@ function [ x_opt, n_feval ] = nelder_mead ( x, function_handle, flag )
 %
 %  Define algorithm constants
 %
+  answer = [0.228278911985387; -1.625534953142922];
+
   rho = 1;    % rho > 0
   xi  = 2;    % xi  > max(rho, 1)
   gam = 0.5;  % 0 < gam < 1
@@ -84,13 +86,13 @@ function [ x_opt, n_feval ] = nelder_mead ( x, function_handle, flag )
     
     figure ( 27 )
     hold on
-    contour(xp,yp,fp,linspace(-3,3,25))
+    contour(xp,yp,fp,[-7:.5:8])
     
     if ( flag )
       plot(x(1:2,1),x(1:2,2),'r')
       plot(x(2:3,1),x(2:3,2),'r')
       plot(x([1 3],1),x([1 3],2),'r')
-      %pause
+      pause
       plot(x(1:2,1),x(1:2,2),'b')
       plot(x(2:3,1),x(2:3,2),'b')
       plot(x([1 3],1),x([1 3],2),'b')
@@ -113,6 +115,8 @@ function [ x_opt, n_feval ] = nelder_mead ( x, function_handle, flag )
   
   k = 0;
   
+  
+   fprintf('Starting Nelder-Mead global optimization\n');
    fprintf(' k \t\t   x(k)\t\t\t  error\n');
   while ( ~converged && ~diverged )
 k = k+1;
@@ -222,15 +226,14 @@ k = k+1;
       plot(x(1:2,1),x(1:2,2),'r')
       plot(x(2:3,1),x(2:3,2),'r')
       plot(x([1 3],1),x([1 3],2),'r')
-      %pause
+      pause
       plot(x(1:2,1),x(1:2,2),'b')
       plot(x(2:3,1),x(2:3,2),'b')
       plot(x([1 3],1),x([1 3],2),'b')
     end
     
     %print stuff
-    fprintf('Starting Nelder-Mead global optimization');
-    fprintf(' %i\t(%.4f, %.4f)\t %.6f\n', k, x(1,1), x(1,2), function_handle(x(1,:)) - function_handle([0.6504, -0.6503]));
+    fprintf(' %i\t(%.4f, %.4f)\t %.6f\n', k, x(1,1), x(1,2), function_handle(x(1,:)) - function_handle(answer));
 
   end
 
@@ -240,7 +243,7 @@ k = k+1;
   end
 
   display(n_feval);
-  x_opt = x(1,:);
+  x_opt = x(1,:)';
   
   if ( diverged )
     fprintf ( 1, '\n' );

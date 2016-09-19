@@ -33,6 +33,8 @@ function [x,N]=conj_grad(grad,xnew,options)
 %The last two variants return a vector of the final point and the
 %number of iterations. 
 
+answer = [0.228278911985387; -1.625534953142922];
+
 if nargin ~= 3
   options = [];
   if nargin ~= 2
@@ -62,14 +64,14 @@ max_iter=options(14);
 
 %table header
 if print,
-    fprintf('Starting conjugate gradient for local optimization');
+    fprintf('Starting conjugate gradient for local optimization\n');
     fprintf(' k \t\t x(k) \t\t\t\t\td(k) \t\t\t alpha \t error\n');
 end %if
 
 %ros_cnt;
 if length(xnew) == 2
   plot(xnew(1),xnew(2),'o')
-  text(xnew(1),xnew(2),'Start Point')
+  text(xnew(1),xnew(2),'Local Start Point')
 end
 
 g_curr=feval(grad,xnew);
@@ -102,7 +104,7 @@ for k = 1:max_iter,
     fprintf('\t(%.4f, %.4f)', xnew(1), xnew(2)); %new x pos
     fprintf('\t(%.4f, %.4f)    ', d(1), d(2)); %direction
     fprintf('\t%.4f', alpha) %alpha
-    fprintf('\t%.4f', sqrt((xnew(1)-1)^2 + (xnew(2)-1)^2)); %error
+    fprintf('\t%.4f', sqrt((xnew(1)-answer(1))^2 + (xnew(2)-answer(2))^2)); %error
     fprintf('\n');
   end %if
 

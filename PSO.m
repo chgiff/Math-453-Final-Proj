@@ -59,7 +59,7 @@ scatter(a,b, 'filled', 'k');
 xlabel('x_1')
 ylabel('x_2')
 title('Particle Swarm on Matlab "peaks" function')
-hold off;
+%hold off;
 pause;
 
 %loop
@@ -101,13 +101,13 @@ g = findMin(func, P);
 fprintf('%i\t  (%.4f, %.4f)\t\t%.5f\n', k, g(1), g(2), sqrt((g(1) - soln(1))^2 + (g(2) - soln(2))^2));
 
 %plot points
+hold off
 a = X(:,1);
 b = X(:,2);
 contour(Q,R,z,levels)
 hold on
 scatter(a,b, 'filled', 'k');
-hold off
-%pause;
+pause;
 
 end
 
